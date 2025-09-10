@@ -1,8 +1,7 @@
 // =========================
-// Full UI Script — Stable & Corrected with Smooth Active Nav
+// Full UI Script — Final & GitHub-Ready
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
-  // helpers
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
 
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(href);
       if (target) {
         window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-        // force update active immediately
         $$('.nav a').forEach(a => a.classList.remove('active'));
         link.classList.add('active');
       }
@@ -24,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================
-     Dark / Light toggle (persisted)
+     Dark / Light toggle
   ========================= */
   const modeBtn = $('#modeToggle');
-  const savedMode = localStorage.getItem('mode'); // 'light' or 'dark'
+  const savedMode = localStorage.getItem('mode');
   if (savedMode === 'light') {
     document.body.classList.add('light-mode');
     if (modeBtn) modeBtn.innerHTML = '<i class="fa fa-sun"></i>';
@@ -77,56 +75,40 @@ document.addEventListener('DOMContentLoaded', () => {
       s.classList.remove('selected');
       s.style.borderColor = '';
     });
-
     if (!selected) return;
     selected.classList.add('selected');
-
-    const accent = getComputedStyle(document.documentElement)
-      .getPropertyValue('--skin-color')
-      .trim();
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--skin-color').trim();
     const fallback = getComputedStyle(selected).backgroundColor;
-    const borderColor = accent || fallback || '#fff';
-    selected.style.borderColor = borderColor;
+    selected.style.borderColor = accent || fallback || '#fff';
   }
 
   swatches.forEach(swatch => {
     swatch.addEventListener('click', () => {
       const skin = swatch.getAttribute('data-skin');
       const theme = swatch.getAttribute('data-theme');
-      if (skin) {
-        applySkinColor(skin);
-      } else if (theme) {
-        applyThemeClass(theme);
-      } else {
-        const bg = getComputedStyle(swatch).backgroundColor;
-        applySkinColor(bg);
-      }
+      if (skin) applySkinColor(skin);
+      else if (theme) applyThemeClass(theme);
+      else applySkinColor(getComputedStyle(swatch).backgroundColor);
       updateActiveSwatch(swatch);
     });
-
-    swatch.addEventListener('keypress', e => {
-      if (e.key === 'Enter') swatch.click();
-    });
+    swatch.addEventListener('keypress', e => { if (e.key === 'Enter') swatch.click(); });
   });
 
   (function restoreTheme() {
     const savedTheme = localStorage.getItem('theme');
     const savedSkin = localStorage.getItem('skin');
-
     if (savedTheme) {
       applyThemeClass(savedTheme);
       const match = swatches.find(s => s.dataset.theme === savedTheme);
       if (match) updateActiveSwatch(match);
       return;
     }
-
     if (savedSkin) {
       applySkinColor(savedSkin);
       const match = swatches.find(s => s.dataset.skin === savedSkin);
       if (match) updateActiveSwatch(match);
       return;
     }
-
     if (swatches.length) updateActiveSwatch(swatches[0]);
   })();
 
@@ -163,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', animateSkills);
 
   /* =========================
-     Copy email (inline feedback)
+     Copy email
   ========================= */
   const copyEmailBtn = $('#copyEmail');
   if (copyEmailBtn) {
@@ -174,10 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const original = copyEmailBtn.textContent;
         copyEmailBtn.textContent = '✔ Copied';
         copyEmailBtn.disabled = true;
-        setTimeout(() => {
-          copyEmailBtn.textContent = original;
-          copyEmailBtn.disabled = false;
-        }, 1800);
+        setTimeout(() => { copyEmailBtn.textContent = original; copyEmailBtn.disabled = false; }, 1800);
       }).catch(() => {
         copyEmailBtn.textContent = 'Failed';
         setTimeout(() => copyEmailBtn.textContent = 'Copy', 1200);
@@ -201,18 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
      ScrollSpy — Correct Active Nav
   ========================= */
   function setActiveNav() {
-    const offset = 120;
-    const scrollPos = window.scrollY + offset;
-
+    const scrollPos = window.scrollY + window.innerHeight / 2; // نص الشاشة
     let currentSection = null;
     $$('section').forEach(sec => {
       const top = sec.offsetTop;
       const bottom = top + sec.offsetHeight;
-      if (scrollPos >= top && scrollPos < bottom) {
-        currentSection = sec;
-      }
+      if (scrollPos >= top && scrollPos < bottom) currentSection = sec;
     });
-
     $$('.nav a').forEach(a => a.classList.remove('active'));
     if (currentSection) {
       const id = currentSection.id;
@@ -222,5 +196,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('scroll', setActiveNav);
   window.addEventListener('load', setActiveNav);
-
-}); // DOMContentLoaded
+});
