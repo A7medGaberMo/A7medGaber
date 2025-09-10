@@ -1,38 +1,29 @@
 // =========================
-// Full UI Script — Final & GitHub-Ready
+// Final UI Script — Intersection Observer ScrollSpy
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
 
-  /* =========================
-     Smooth scroll + nav click
-  ========================= */
+  /* Smooth scroll */
   $$('.nav a').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      const href = link.getAttribute('href');
-      const target = document.querySelector(href);
+      const target = document.querySelector(link.getAttribute('href'));
       if (target) {
-        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-        $$('.nav a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
 
-  /* =========================
-     Dark / Light toggle
-  ========================= */
+  /* Dark/Light Mode */
   const modeBtn = $('#modeToggle');
-  const savedMode = localStorage.getItem('mode');
-  if (savedMode === 'light') {
+  if (localStorage.getItem('mode') === 'light') {
     document.body.classList.add('light-mode');
     if (modeBtn) modeBtn.innerHTML = '<i class="fa fa-sun"></i>';
-  } else {
-    if (modeBtn) modeBtn.innerHTML = '<i class="fa fa-moon"></i>';
+  } else if (modeBtn) {
+    modeBtn.innerHTML = '<i class="fa fa-moon"></i>';
   }
-
   if (modeBtn) {
     modeBtn.addEventListener('click', () => {
       const isLight = document.body.classList.toggle('light-mode');
@@ -41,134 +32,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* =========================
-     Theme color / swatch switcher
-  ========================= */
+  /* Theme Swatches */
   const swatches = $$('.swatch');
-  const THEME_CLASSES = ['theme-petroli', 'theme-phosphory', 'theme-azure'];
-
-  function clearThemeClasses() {
-    THEME_CLASSES.forEach(c => document.body.classList.remove(c));
-  }
-
-  function applyThemeClass(themeName) {
-    clearThemeClasses();
-    if (themeName && themeName !== 'default') {
-      document.body.classList.add(`theme-${themeName}`);
-      localStorage.setItem('theme', themeName);
-      localStorage.removeItem('skin');
-    } else {
-      localStorage.removeItem('theme');
-    }
-  }
-
-  function applySkinColor(colorValue) {
-    if (!colorValue) return;
-    clearThemeClasses();
-    document.documentElement.style.setProperty('--skin-color', colorValue);
-    localStorage.setItem('skin', colorValue);
-    localStorage.removeItem('theme');
-  }
-
-  function updateActiveSwatch(selected) {
-    swatches.forEach(s => {
-      s.classList.remove('selected');
-      s.style.borderColor = '';
+  swatches.forEach(s => {
+    s.addEventListener('click', () => {
+      const skin = s.dataset.skin;
+      if (skin) document.documentElement.style.setProperty('--skin-color', skin);
+      swatches.forEach(w => w.classList.remove('selected'));
+      s.classList.add('selected');
+      localStorage.setItem('skin', skin);
     });
-    if (!selected) return;
-    selected.classList.add('selected');
-    const accent = getComputedStyle(document.documentElement).getPropertyValue('--skin-color').trim();
-    const fallback = getComputedStyle(selected).backgroundColor;
-    selected.style.borderColor = accent || fallback || '#fff';
-  }
-
-  swatches.forEach(swatch => {
-    swatch.addEventListener('click', () => {
-      const skin = swatch.getAttribute('data-skin');
-      const theme = swatch.getAttribute('data-theme');
-      if (skin) applySkinColor(skin);
-      else if (theme) applyThemeClass(theme);
-      else applySkinColor(getComputedStyle(swatch).backgroundColor);
-      updateActiveSwatch(swatch);
-    });
-    swatch.addEventListener('keypress', e => { if (e.key === 'Enter') swatch.click(); });
   });
+  if (localStorage.getItem('skin')) {
+    document.documentElement.style.setProperty('--skin-color', localStorage.getItem('skin'));
+    const match = swatches.find(s => s.dataset.skin === localStorage.getItem('skin'));
+    if (match) match.classList.add('selected');
+  }
 
-  (function restoreTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const savedSkin = localStorage.getItem('skin');
-    if (savedTheme) {
-      applyThemeClass(savedTheme);
-      const match = swatches.find(s => s.dataset.theme === savedTheme);
-      if (match) updateActiveSwatch(match);
-      return;
-    }
-    if (savedSkin) {
-      applySkinColor(savedSkin);
-      const match = swatches.find(s => s.dataset.skin === savedSkin);
-      if (match) updateActiveSwatch(match);
-      return;
-    }
-    if (swatches.length) updateActiveSwatch(swatches[0]);
-  })();
-
-  /* =========================
-     Typewriter effect
-  ========================= */
-  function typeWriter(el, text, delay = 100) {
+  /* Typewriter */
+  const typeEl = $('.typewriter');
+  if (typeEl) {
     let i = 0;
-    el.textContent = '';
+    const txt = typeEl.textContent.trim();
+    typeEl.textContent = '';
     function type() {
-      if (i < text.length) {
-        el.textContent += text[i++];
-        setTimeout(type, delay);
+      if (i < txt.length) {
+        typeEl.textContent += txt[i++];
+        setTimeout(type, 90);
       }
     }
     type();
   }
-  const typeEl = document.querySelector('.typewriter');
-  if (typeEl) typeWriter(typeEl, typeEl.textContent.trim(), 90);
 
-  /* =========================
-     Animate skills when visible
-  ========================= */
+  /* Animate Skills */
   const skillSpans = $$('section.skills .skill-progress span');
   function animateSkills() {
     skillSpans.forEach(s => {
       const parent = s.parentElement;
-      const level = s.dataset.level;
       const rect = parent.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 50) s.style.width = level;
+      if (rect.top < window.innerHeight - 50) s.style.width = s.dataset.level;
     });
   }
   window.addEventListener('scroll', animateSkills);
   window.addEventListener('load', animateSkills);
 
-  /* =========================
-     Copy email
-  ========================= */
-  const copyEmailBtn = $('#copyEmail');
-  if (copyEmailBtn) {
-    copyEmailBtn.addEventListener('click', () => {
-      const emailElem = $('#emailLink');
-      const email = emailElem ? emailElem.textContent.trim() : copyEmailBtn.dataset.copy || '';
+  /* Copy Email */
+  const copyBtn = $('#copyEmail');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const email = $('#emailLink').textContent.trim();
       navigator.clipboard.writeText(email).then(() => {
-        const original = copyEmailBtn.textContent;
-        copyEmailBtn.textContent = '✔ Copied';
-        copyEmailBtn.disabled = true;
-        setTimeout(() => { copyEmailBtn.textContent = original; copyEmailBtn.disabled = false; }, 1800);
-      }).catch(() => {
-        copyEmailBtn.textContent = 'Failed';
-        setTimeout(() => copyEmailBtn.textContent = 'Copy', 1200);
+        const original = copyBtn.textContent;
+        copyBtn.textContent = '✔ Copied';
+        copyBtn.disabled = true;
+        setTimeout(() => { copyBtn.textContent = original; copyBtn.disabled = false; }, 1800);
       });
     });
   }
 
-  /* =========================
-     Scroll reveal
-  ========================= */
+  /* Scroll Reveal */
+  const sections = $$('section');
   function revealOnScroll() {
-    $$('section').forEach(sec => {
+    sections.forEach(sec => {
       const rect = sec.getBoundingClientRect();
       if (rect.top < window.innerHeight - 50) sec.classList.add('active');
     });
@@ -176,24 +101,19 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
 
-  /* =========================
-     ScrollSpy — Correct Active Nav
-  ========================= */
-  function setActiveNav() {
-    const scrollPos = window.scrollY + window.innerHeight / 2; // نص الشاشة
-    let currentSection = null;
-    $$('section').forEach(sec => {
-      const top = sec.offsetTop;
-      const bottom = top + sec.offsetHeight;
-      if (scrollPos >= top && scrollPos < bottom) currentSection = sec;
+  /* Intersection Observer for ScrollSpy */
+  const navLinks = $$('.nav a');
+  const observerOptions = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 };
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = $(`.nav a[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        if (link) link.classList.add('active');
+      }
     });
-    $$('.nav a').forEach(a => a.classList.remove('active'));
-    if (currentSection) {
-      const id = currentSection.id;
-      const link = document.querySelector(`.nav a[href="#${id}"]`);
-      if (link) link.classList.add('active');
-    }
-  }
-  window.addEventListener('scroll', setActiveNav);
-  window.addEventListener('load', setActiveNav);
+  }, observerOptions);
+
+  sections.forEach(sec => observer.observe(sec));
 });
