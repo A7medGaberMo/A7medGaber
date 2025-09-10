@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ahmed Gaber — Backend Developer Portfolio. Showcasing education, services, skills, projects, and contact details." />
+  <title>Ahmed Gaber — Portfolio</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Clicker+Script&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="main-container">
+
+    <!-- Sidebar -->
+<aside class="aside">
+  <div class="logo">
+    <a href="#home"><span>A.</span>Gaber</a>
+  </div>
+
+  <ul class="nav">
+    <li><a href="#home" class="active"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="#about"><i class="fa fa-user"></i> About</a></li>
+    <li><a href="#education"><i class="fa fa-graduation-cap"></i> Education</a></li>
+    <li><a href="#services"><i class="fa fa-cogs"></i> Services</a></li>
+    <li><a href="#skills"><i class="fa fa-chart-simple"></i> Skills</a></li>
+    <li><a href="#projects"><i class="fa fa-briefcase"></i> Projects</a></li>
+    <li><a href="#contact"><i class="fa fa-comments"></i> Contact</a></li>
+  </ul>
+
+  <!-- Theme controls -->
+  <div class="theme-controls">
+    <!-- Dark/Light toggle -->
+    <button id="modeToggle" title="Toggle theme"><i class="fa fa-moon"></i></button>
+
+    <!-- Color themes -->
+   <div class="color-swatches">
+  <span class="swatch red" data-skin="#e50914"></span>
+  <span class="swatch azure" data-skin="#007bff"></span>
+  <span class="swatch green" data-skin="#2ecc71"></span>
+  <span class="swatch orange" data-skin="#f39c12"></span>
+</div>
+
+
+</aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+      <!-- Home -->
+      <section id="home" class="section home">
+        <h1>Hi, I’m Ahmed Gaber</h1>
+        <p class="typewriter">A passionate <strong>Full-Stack .NET Developer</strong> focused on building reliable and scalable systems.</p>
+
+        <div class="profile-pic">
+    <img src="Pic.jpg" alt="Ahmed Gaber">
+  </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="section about">
+        <h2>About Me</h2>
+        <p>
+          I’m a backend-focused developer exploring full-stack development. Skilled in C#, ASP.NET Core, SQL Server, and always improving through real projects, problem-solving, and design patterns. 
+          I organize work with Notion and practice algorithms on LeetCode.
+        </p>
+      </section>
+
+      <!-- Education -->
+      <section id="education" class="section education">
+        <h2>Education & Internships</h2>
+
+        <div class="edu-card">
+          <h3>Bachelor of Computers and Information</h3>
+          <p>Kafr El-Sheikh University — Dept. Computer Science</p>
+          <span>Final Year Student</span>
+        </div>
+
+        <div class="edu-card">
+          <h3>DEPI Internship — Skills Dynamics</h3>
+          <p>Fullstack .NET Track (Alexandria)</p>
+          <span>Started: 27/06 — Ongoing</span>
+        </div>
+
+        <div class="edu-card">
+          <h3>ITI Summer Training</h3>
+          <p>Web Development — MVC & Modern .NET</p>
+          <span>Started: 18/08 — Ongoing</span>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services" class="section services">
+        <h2>Services</h2>
+
+        <div class="service-grid">
+          <div class="service-card">
+            <i class="fa fa-database"></i>
+            <h3>Database Design</h3>
+            <p>ERD, mapping, normalization — schemas built for performance and maintainability.</p>
+          </div>
+
+          <div class="service-card">
+            <i class="fa fa-code"></i>
+            <h3>Backend Development</h3>
+            <p>APIs & MVC apps using ASP.NET Core, EF Core and pragmatic design patterns.</p>
+          </div>
+
+          <div class="service-card">
+            <i class="fa fa-project-diagram"></i>
+            <h3>Full Project Delivery</h3>
+            <p>From requirements to delivery: CRUD systems, booking platforms, scheduling apps.</p>
+          </div>
+
+          <div class="service-card">
+            <i class="fa fa-bolt"></i>
+            <h3>Optimization & Debugging</h3>
+            <p>Query tuning, refactoring for performance and clearer maintainable code.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="section skills">
+        <h2>Skills</h2>
+
+        <!-- Technical Skills -->
+        <div class="skill-category">
+          <h3>Technical Skills</h3>
+
+          <div class="skill"><div class="skill-title"><i class="fa fa-hashtag"></i> C# <span>Expert</span></div><div class="skill-progress"><span data-level="95%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa fa-server"></i> ASP.NET Core <span>Advanced</span></div><div class="skill-progress"><span data-level="80%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa fa-layer-group"></i> OOP & Patterns <span>Advanced</span></div><div class="skill-progress"><span data-level="80%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa fa-database"></i> SQL Server <span>Advanced</span></div><div class="skill-progress"><span data-level="85%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa fa-database"></i> Entity Framework <span>Intermediate</span></div><div class="skill-progress"><span data-level="70%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa fa-code"></i> HTML / CSS / JS <span>Intermediate</span></div><div class="skill-progress"><span data-level="65%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa-brands fa-python"></i> Python <span>Basic</span></div><div class="skill-progress"><span data-level="30%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa-solid fa-file-code"></i> C++ <span>Basic</span></div><div class="skill-progress"><span data-level="30%"></span></div></div>
+          <div class="skill"><div class="skill-title"><i class="fa-solid fa-code-branch"></i> Go <span>Basic</span></div><div class="skill-progress"><span data-level="25%"></span></div></div>
+        </div>
+
+       <!-- Soft Skills -->
+<div class="skill-category">
+  <h3>Soft Skills</h3>
+
+  <div class="skill">
+    <div class="skill-title">
+      <i class="fa fa-brain"></i> Problem Solving <span>Advanced</span>
+    </div>
+    <div class="skill-progress"><span data-level="90%"></span></div>
+  </div>
+
+  <div class="skill">
+    <div class="skill-title">
+      <i class="fa fa-users"></i> Teamwork <span>Advanced</span>
+    </div>
+    <div class="skill-progress"><span data-level="85%"></span></div>
+  </div>
+
+  <div class="skill">
+    <div class="skill-title">
+      <i class="fa fa-comments"></i> Communication <span>Intermediate</span>
+    </div>
+    <div class="skill-progress"><span data-level="75%"></span></div>
+  </div>
+
+  <div class="skill">
+    <div class="skill-title">
+      <i class="fa fa-clock"></i> Time Management <span>Intermediate</span>
+    </div>
+    <div class="skill-progress"><span data-level="70%"></span></div>
+  </div>
+
+  <div class="skill">
+    <div class="skill-title">
+      <i class="fa fa-sync-alt"></i> Adaptability <span>Advanced</span>
+    </div>
+    <div class="skill-progress"><span data-level="80%"></span></div>
+  </div>
+
+  <div class="skill">
+    <div class="skill-title">
+      <i class="fa fa-fire"></i> Hard Work <span>Expert</span>
+    </div>
+    <div class="skill-progress"><span data-level="95%"></span></div>
+  </div>
+
+</div>
+
+
+   <!-- Tools -->
+<div class="skill-category">
+  <h3>Tools</h3>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <i class="fa-solid fa-code"></i>
+      <span>Visual Studio</span>
+    </div>
+    <div class="tool-card">
+      <i class="fa-brands fa-github"></i>
+      <span>GitHub</span>
+    </div>
+    <div class="tool-card">
+      <i class="fa-solid fa-note-sticky"></i>
+      <span>Notion</span>
+    </div>
+    <div class="tool-card">
+      <i class="fa-solid fa-laptop-code"></i>
+      <span>VS Code</span>
+    </div>
+    <div class="tool-card">
+      <i class="fa-solid fa-database"></i>
+      <span>SSMS</span>
+    </div>
+  </div>
+</div>
+
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+  <h2>Projects</h2>
+
+  <div class="project-card">
+    <h3><i class="fa fa-school"></i> College Management System</h3>
+    <p>
+      A comprehensive platform built with modular MVC architecture for handling students, courses, and staff. 
+      Includes <strong>role-based authentication</strong> for admins, faculty, and students, 
+      automated grade/report generation, attendance tracking, and course scheduling. 
+      Designed to be scalable and maintainable with layered architecture.
+    </p>
+    <span>Stack: C#, ASP.NET MVC, EF Core, SQL Server</span>
+  </div>
+
+  <div class="project-card">
+    <h3><i class="fa fa-building"></i> Real Estate Booking Platform</h3>
+    <p>
+      Developed a full-featured booking platform for landlords and users with secure login, 
+      property listing management, and real-time <strong>availability calendar</strong>. 
+      Integrated booking confirmation emails, payment simulation, and admin dashboards 
+      for monitoring transactions and occupancy trends.
+    </p>
+    <span>Stack: ASP.NET Core API, EF Core, SQL Server</span>
+  </div>
+
+  <div class="project-card">
+    <h3><i class="fa fa-book"></i> Book Management</h3>
+    <p>
+      A CRUD-based management system allowing admins to add, update, and remove books, 
+      as well as manage reservations and scheduling. 
+      Implemented search and filtering, reservation conflict handling, and 
+      generated detailed reports for usage analytics. 
+      Built with a clean MVC structure for easy extensibility.
+    </p>
+    <span>Stack: MVC, EF Core</span>
+  </div>
+
+  <div class="project-card">
+    <h3><i class="fa fa-tasks"></i> Process Scheduling (MVC)</h3>
+    <p>
+      Simulated key CPU scheduling algorithms (FCFS, SJF, Round Robin, Priority) within a web app. 
+      Designed visual process state transitions using interactive charts 
+      to help students understand algorithm behavior. 
+      Enhanced usability with step-by-step execution mode and performance metrics comparison.
+    </p>
+    <span>Stack: MVC</span>
+  </div>
+
+  <div class="project-card">
+    <h3><i class="fa fa-list-check"></i> To-Do List (Design Patterns)</h3>
+    <p>
+      Built a robust task management system applying <strong>Repository & Unit of Work</strong> 
+      patterns for clean data access. 
+      Included a DI-ready service layer, unit test coverage, 
+      and extensible architecture supporting new features easily. 
+      Features include task categorization, deadlines, and completion statistics.
+    </p>
+    <span>Stack: C#, Patterns</span>
+  </div>
+</section>
+
+
+      <!-- Contact -->
+     <section id="contact" class="section contact">
+  <h2>Contact</h2>
+  <ul>
+    <!-- Email -->
+    <li>
+      <i class="fa fa-envelope"></i> 
+      <a id="emailLink" href="mailto:ahmedgaber124004@gmail.com">
+        ahmedgaber124004@gmail.com
+      </a>
+      <button id="copyEmail" class="copy-btn">Copy</button>
+    </li>
+
+    <!-- GitHub -->
+    <li>
+      <i class="fa-brands fa-github"></i> 
+      <a href="https://github.com/A7medGaberMo" target="_blank">
+        A7medGaberMo
+      </a>
+    </li>
+
+    <!-- LinkedIn -->
+    <li>
+      <i class="fa-brands fa-linkedin"></i> 
+      <a href="https://linkedin.com/in/A7medGaber" target="_blank">
+        A7medGaber
+      </a>
+    </li>
+
+    <!-- WhatsApp -->
+    <li>
+      <i class="fa-brands fa-whatsapp"></i> 
+      <a href="https://wa.me/201556447294" target="_blank">
+        +20 1556447294
+      </a>
+    </li>
+  </ul>
+</section>
+
+
+  <script src="main.js"></script>
+
+</body>
+</html>
